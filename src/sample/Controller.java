@@ -12,6 +12,8 @@ public class Controller {
     @FXML
     private void click(ActionEvent event) {
         btn.setText("You've clicked!");
+
+        FilesWorker filesWorker = new FilesWorker();
     }
 
 }
