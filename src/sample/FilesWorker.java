@@ -2,11 +2,16 @@ package sample;
 
 import java.io.*;
 import java.nio.file.Files;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 public class FilesWorker {
 
-    public FilesWorker() {
+    private String GOAL_TIME;
+
+    public FilesWorker(int num) {
+        GOAL_TIME = getGOAL_TIME(num);
         init();
     }
 
@@ -57,10 +62,25 @@ public class FilesWorker {
 
 //            br.lines().forEach(System.out::println);
             String verify = "";
+//            Pattern pattern = Pattern.compile("name: '(.+)'");
+//            Pattern pattern = Pattern.compile("[F]\\d{6}[_]\\d{3}");
+            Pattern pattern = Pattern.compile("([F])(\\d{6})([_])");
             while( (verify=br.readLine()) != null ){ //***editted
-                    String putData = verify.replaceAll("here", "there");
-                    bw.write(putData + "\n");
+                Matcher m = pattern.matcher(verify);
+                if (m.find() ) {
+                    Pattern patternCh = Pattern.compile("(\\d{6})");
+                    String gp = m.group(0);
+                    String gp1 = m.group(1);
+                    String gp2 = m.group(2);
+
+                   String newStr = verify.replaceAll(patternCh.toString(), GOAL_TIME);
+                    bw.write(newStr + "\n");
                     bw.flush();
+                    System.out.println("Pattern find");
+                } else {
+                    bw.write(verify + "\n");
+                    bw.flush();
+                }
             }
             br.close();
             bw.close();
@@ -79,5 +99,9 @@ public class FilesWorker {
         public boolean accept(File dir, String name) {
             return (name.endsWith(".txt") || name.endsWith(".LAY"));
         }
+    }
+
+    private String getGOAL_TIME(int step) {
+        return "111111";
     }
 }

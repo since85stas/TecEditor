@@ -13,7 +13,7 @@ public class Controller {
     private void click(ActionEvent event) {
         btn.setText("You've clicked!");
 
-        FilesWorker filesWorker = new FilesWorker();
+        FilesWorker filesWorker = new FilesWorker(1);
     }
 
 }
