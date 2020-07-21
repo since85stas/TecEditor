@@ -2,6 +2,8 @@ package sample;
 
 import java.io.*;
 import java.nio.file.Files;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
@@ -9,6 +11,8 @@ import java.util.stream.Stream;
 public class FilesWorker {
 
     private String GOAL_TIME;
+
+    private final int LEN = 6;
 
     public FilesWorker(int num) {
         GOAL_TIME = getGOAL_TIME(num);
@@ -84,6 +88,11 @@ public class FilesWorker {
             }
             br.close();
             bw.close();
+            String oldName = file.getName();
+            fr.close();
+            boolean res = file.delete();
+            boolean del = tmpFile.renameTo(file);
+
 //            Stream<String> lines = Files.lines(file);
             System.out.println("File " + file.getName() + " is editing");
         } catch (Exception e) {
@@ -97,11 +106,25 @@ public class FilesWorker {
      */
     static class FileTecFilter implements FilenameFilter {
         public boolean accept(File dir, String name) {
-            return (name.endsWith(".txt") || name.endsWith(".LAY"));
+            return (name.endsWith(".lay") || name.endsWith(".LAY"));
         }
     }
 
     private String getGOAL_TIME(int step) {
-        return "111111";
+        String num = String.valueOf(step);
+        StringBuilder nullSgtr = new StringBuilder();
+        for (int i = 0; i < LEN - num.length(); i++) {
+            nullSgtr.append("0");
+        }
+        Stream<String> goalStr = Arrays.stream(num.split(""));
+//                .sorted(Collections.reverseOrder());
+//        for (int i = 0; i < LEN - num.length(); i++) {
+        Stream<String> stream =   Stream.concat(Stream.of(nullSgtr.toString().split("")),goalStr);
+//        }
+//        stream.forEach(System.out::println);
+//        String revNum = .reduce( (s1,s2) -> s1+s2).get()
+        int nulls = LEN - num.length();
+
+        return stream.reduce( (s1,s2) -> s1+s2).get();
     }
 }

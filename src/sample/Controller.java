@@ -12,8 +12,12 @@ public class Controller {
     @FXML
     private void click(ActionEvent event) {
         btn.setText("You've clicked!");
-
-        FilesWorker filesWorker = new FilesWorker(1);
+        int num = 0;
+        if (Utils.checkTimestep(num)) {
+            FilesWorker filesWorker = new FilesWorker(num);
+        } else {
+            System.out.println("wrong number");
+        }
     }
 
 }
