@@ -3,6 +3,32 @@
 <?import java.lang.*?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
-<Group fx:id="root" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
-    <Button text="Click!" onAction="#click" fx:id="btn"  />
+<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.TextField?>
+<Group fx:id="root" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller" >
+    <VBox>
+        <padding>
+            <Insets top="10" bottom="10" left="10" right="10"/>
+        </padding>
+
+        <CheckBox>
+            <text>"All layouts"</text>
+        </CheckBox>
+
+        <padding>
+            <Insets top="10" bottom="10" left="10" right="10"/>
+        </padding>
+
+        <TextField fx:id="edittext">
+        </TextField>
+
+        <padding>
+            <Insets top="10" bottom="10" left="10" right="10"/>
+        </padding>
+
+        <Button text="Edit" onAction="#click" fx:id="btn"/>
+
+    </VBox>
 </Group>
