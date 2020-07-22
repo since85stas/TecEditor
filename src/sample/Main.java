@@ -12,12 +12,10 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("main.fxml"));
 
-        primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 300, 275));
+        primaryStage.setTitle("Tec layout editor");
+        primaryStage.setScene(new Scene(root, 200, 175));
         primaryStage.show();
     }
-
-
 
     public static void main(String[] args) {
         launch(args);

@@ -14,8 +14,11 @@ public class FilesWorker {
 
     private final int LEN = 6;
 
-    public FilesWorker(int num) {
+    private Controller controller;
+
+    public FilesWorker(int num, Controller controller) {
         GOAL_TIME = getGOAL_TIME(num);
+        this.controller = controller;
         init();
     }
 
@@ -45,13 +48,18 @@ public class FilesWorker {
      */
     private File[] getFiles(File dir) {
         File[] files = dir.listFiles(new FileTecFilter());
-        try {
-            for (File file : files) {
-                System.out.println(file.getAbsolutePath());
-            }
-        } catch (NullPointerException e) {
-            System.out.println(e.toString());
-        }
+
+            try {
+                if (files.length > 0) {
+                    for (File file : files) {
+                        System.out.println(file.getAbsolutePath());
+                    }
+                } else {
+                    controller.addText("No layouts finding in a dir");
+                }
+                } catch(NullPointerException e){
+                    System.out.println(e.toString());
+                }
         return files;
     }
 
@@ -95,7 +103,9 @@ public class FilesWorker {
 
 //            Stream<String> lines = Files.lines(file);
             System.out.println("File " + file.getName() + " is editing");
+            controller.addText("Layout " + file.getName() + " changing ok\n");
         } catch (Exception e) {
+            controller.addText("Layout " + file.getName() + " changing error");
             System.out.println(e.toString());
         }
 

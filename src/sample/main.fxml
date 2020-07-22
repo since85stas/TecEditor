@@ -7,28 +7,40 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Label?>
 <Group fx:id="root" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller" >
     <VBox>
-        <padding>
-            <Insets top="10" bottom="10" left="10" right="10"/>
-        </padding>
 
-        <CheckBox fx:id="all_check">
+        <CheckBox fx:id="all_check" selected="true">
             <text>"All layouts"</text>
+            <padding>
+                <Insets top="10" bottom="10" left="10" right="10"/>
+            </padding>
         </CheckBox>
 
-        <padding>
-            <Insets top="10" bottom="10" left="10" right="10"/>
-        </padding>
-
-        <TextField fx:id="edittext">
+        <Label text="Enter time step"></Label>
+        <TextField fx:id="edittext" prefWidth="50">
+            <padding>
+                <Insets top="0" bottom="10" left="10" right="10"/>
+            </padding>
         </TextField>
 
-        <padding>
-            <Insets top="10" bottom="10" left="10" right="10"/>
-        </padding>
+        <HBox>
+            <Button text="Edit" onAction="#click" fx:id="btn" >
+                <padding>
+                    <Insets top="10" bottom="10" left="10" right="10"/>
+                </padding>
+            </Button>
 
-        <Button text="Edit" onAction="#click" fx:id="btn"/>
+
+        </HBox>
+        <TextArea fx:id="out_area">
+            <padding>
+                <Insets top="10" bottom="10" left="10" right="10"/>
+            </padding>
+        </TextArea>
 
     </VBox>
 </Group>

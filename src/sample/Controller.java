@@ -6,7 +6,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 
 import java.sql.Driver;
 
@@ -19,25 +21,36 @@ public class Controller {
     private TextField edittext;
 
     @FXML
-    private CheckBox all_checks;
+    private CheckBox all_check;
+
+    @FXML
+    private TextArea out_area;
 
     @FXML
     private void click(ActionEvent event) {
 //        btn.setText("You've clicked!");
-        int num = Integer.parseInt(edittext.getText());
-        if (Utils.checkTimestep(num)) {
-            if (all_checks.isSelected()) {
-                FilesWorker filesWorker = new FilesWorker(num);
+        out_area.clear();
+//        int num = Integer.parseInt(edittext.getText());
+        if (Utils.checkTimestep(edittext.getText())) {
+            if (all_check.isSelected()) {
+                FilesWorker filesWorker = new FilesWorker(Integer.parseInt(edittext.getText()), this);
             }
         } else {
+            out_area.appendText("Wrong number");
             System.out.println("wrong number");
         }
+    }
+
+    protected void addText(String text) {
+        out_area.appendText(text);
     }
 
     @FXML
     public void initialize() {
         System.out.println("second");
         addLstnrs();
+
+        edittext.requestFocus();
     }
 
     private void addLstnrs() {
